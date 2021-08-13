@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'agenda',
     'rest_framework',
+    'djmoney',
 ]
 
 MIDDLEWARE = [

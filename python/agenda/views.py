@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from agenda.models import Reservas,Usuarios,CheckIn,CheckOut
-from agenda.serializer import ReservaSerializada,UserSerializado,CheckSerializado,CheckoutSerializado
+from agenda.models import Reservas,Usuarios,CheckIn,CheckOut,Limpeza
+from agenda.serializer import ReservaSerializada,UserSerializado,CheckSerializado,CheckoutSerializado,faxinaSeriada
 from django.db.models import F
 
 
@@ -14,7 +14,7 @@ class ReservasViews(viewsets.ModelViewSet):
     serializer_class=ReservaSerializada
 
 class CheckInViews(viewsets.ModelViewSet):
-    queryset=CheckIn.objects.select_related('usuario').all()
+    queryset=CheckIn.objects.select_related('usuario')
     serializer_class=CheckSerializado
     
 
@@ -22,8 +22,12 @@ class CheckInViews(viewsets.ModelViewSet):
 
 
 class CheckoutViews(viewsets.ModelViewSet):
-    queryset=CheckOut.objects.select_related('quarto').all()
+    queryset=CheckOut.objects.select_related('quarto','usuario')
     serializer_class=CheckoutSerializado
+
+class Limpeza(viewsets.ModelViewSet):
+    queryset=Limpeza.objects.select_related('quarto')
+    serializer_class=faxinaSeriada
  
 
 

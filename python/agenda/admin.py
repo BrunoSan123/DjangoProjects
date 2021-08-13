@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from agenda.models import Usuarios,Reservas,CheckIn,CheckOut
+from agenda.models import Usuarios,Reservas,CheckIn,CheckOut,Limpeza
 
 class Usuario(admin.ModelAdmin):
     list_display=('id','nome','rg','email','data_de_cadastro')
@@ -31,6 +31,13 @@ class Checkout(admin.ModelAdmin):
     list_display_links=('usuario','despesas')
     search_fields=('usuario',)
 admin.site.register(CheckOut,Checkout)
+
+
+class Faxina(admin.ModelAdmin):
+    list_display=('faxina','quarto','horarios')
+    list_display_links=('quarto','horarios')
+    search_fields=('horarios',)
+admin.site.register(Limpeza,Faxina)
 
 
 

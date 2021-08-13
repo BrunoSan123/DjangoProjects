@@ -5,6 +5,8 @@ from django.db.models.deletion import CASCADE
 from django.db.models.fields import BigIntegerField
 
 
+
+
 class Usuarios(models.Model):
     nome = models.CharField(max_length=50)
     rg =models.IntegerField()
@@ -39,8 +41,8 @@ class CheckIn(models.Model):
 
 class CheckOut(models.Model):
     id=models.BigIntegerField(primary_key=True,default=True,auto_created=True)
-    usuario =models.OneToOneField(Usuarios,on_delete=models.CASCADE,default=True)
-    quarto= models.OneToOneField(CheckIn,on_delete=models.CASCADE,unique=True)
+    usuario =models.OneToOneField(Usuarios,on_delete=models.CASCADE)
+    quarto= models.OneToOneField(CheckIn,on_delete=models.CASCADE)
     despesas =models.IntegerField()
 
 
@@ -48,8 +50,8 @@ class CheckOut(models.Model):
 
 class Limpeza(models.Model):
     faxina=models.BooleanField(default=False)
-    quarto =models.ForeignKey(CheckIn,on_delete=models.CASCADE)
-    horarios =models.TimeField(default=True)
+    quarto =models.OneToOneField(CheckIn,on_delete=models.CASCADE,primary_key=True)
+    horarios =models.TimeField()
 
     def __bool__(self):
         return self.faxina
