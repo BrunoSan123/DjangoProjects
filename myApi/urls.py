@@ -17,6 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
+from pokemons.views import lista_de_pokemon, lista_de_territorio,lista_de_treinador
+from rest_framework import routers
+
+router= routers.DefaultRouter()
+router.register(r'pokemons',lista_de_pokemon)
+router.register(r'territórios',lista_de_territorio)
+
 
 
 urlpatterns = [
