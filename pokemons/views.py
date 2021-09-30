@@ -8,7 +8,7 @@ from pokemons.api.serializers import PokemonSerializado,TerritorioSerializado,tr
 def lista_de_pokemon(request):
     if request.method =='GET':
         pokemons=Pokemon.objects.all()
-        serializer=PokemonSerializado(pokemons)
+        serializer=PokemonSerializado(pokemons, many=True)
         return Response(serializer.data)
 
     elif request.method =='POST':
@@ -22,7 +22,7 @@ def lista_de_pokemon(request):
 def lista_de_territorio(request):
     if request.method=='GET':
         territorios =Territorios.objects.all()
-        serializer = TerritorioSerializado(territorios)
+        serializer = TerritorioSerializado(territorios,many=True)
         return Response(serializer.data) 
 
     elif request.method=='POST':
@@ -36,7 +36,7 @@ def lista_de_territorio(request):
 def lista_de_treinador(request):
     if request.method=='GET':
         treinador = Treinador.objects.all()
-        serializer=treinadorSerializado(treinador)
+        serializer=treinadorSerializado(treinador,many=True)
         return Response(serializer.data)
     elif request.method=='POST':
         serializer =treinadorSerializado(data=request.data)

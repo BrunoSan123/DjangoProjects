@@ -5,7 +5,7 @@ from pokemons.models import Pokemon, Territorios,Ginasios,Treinador
 class PokemonSerializado(serializers.ModelSerializer):
     class Meta:
         model =Pokemon
-        fields='__all__'
+        fields=['id','nome','tipo','estagio_de_evolucao','elemento','descricao','imagem']
 
 class TerritorioSerializado(serializers.ModelSerializer):
     pokemons= serializers.StringRelatedField()
