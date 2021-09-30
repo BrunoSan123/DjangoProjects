@@ -14,18 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.db.models import base
+from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
 from pokemons.views import lista_de_pokemon, lista_de_territorio,lista_de_treinador
 from rest_framework import routers
 
-router= routers.DefaultRouter()
-router.register(r'pokemons',lista_de_pokemon)
-router.register(r'territórios',lista_de_territorio)
+#router= routers.DefaultRouter()
+#router.register(r'pokemons/',lista_de_pokemon,basename='pokemon-list')
+#router.register(r'territórios/',lista_de_territorio,basename='territorio-lista')
+#router.register(r'treinadores/',lista_de_treinador,basename='treinador-lista')
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('pokemons/',lista_de_pokemon),
+    path('territorios/',lista_de_territorio),
+    path('treinadores/',lista_de_treinador)
 ]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

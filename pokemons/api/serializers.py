@@ -11,18 +11,18 @@ class TerritorioSerializado(serializers.ModelSerializer):
     pokemons= serializers.StringRelatedField()
     class Meta:
         model=Territorios
-        fields=['id','nome','pokemons','descricao','imagemTerritorial']
+        fields=['id','nome_do_territorio','pokemons','descricao','imagemTerritorial']
 
 class GinasioSerializados(serializers.ModelSerializer):
     localizacao =serializers.StringRelatedField()
     class Meta:
         model=Ginasios
-        fields=['id','nome','localizacao']
+        fields=['id','nome_do_ginasio','localizacao']
 
 class treinadorSerializado(serializers.ModelSerializer):
     pokemons_coletados=serializers.StringRelatedField()
     insignias=serializers.StringRelatedField()
     class Meta:
         model =Treinador
-        fields=['id','nome','pokemons_coletados','insignias','foto']
+        fields=['id','nome_do_treinador','pokemons_coletados','insignias','foto']
 
