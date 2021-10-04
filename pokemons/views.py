@@ -79,7 +79,7 @@ def login_treinador(request):
     serializer =treinadorSerializado(data=request.data)
     if serializer == treinador:
         token =obter_tokens_para_treinador(treinador)
-        return Response(serializer.data,token)
+        return Response(token)
 
 
 

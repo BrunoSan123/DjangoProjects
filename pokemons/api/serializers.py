@@ -24,5 +24,11 @@ class treinadorSerializado(serializers.ModelSerializer):
     insignias=serializers.StringRelatedField()
     class Meta:
         model =Treinador
-        fields=['id','nome_do_treinador','pokemons_coletados','insignias','foto']
+        fields=['id','nome_do_treinador','senha','pokemons_coletados','insignias','foto']
+
+        def create_data(self,validated_data):
+
+            treinador =Treinador.objects.create(
+
+            )
 

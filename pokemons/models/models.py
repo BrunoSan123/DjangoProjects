@@ -28,9 +28,11 @@ class Ginasios(models.Model):
 class Treinador(models.Model):
     id=models.BigAutoField(primary_key=True)
     nome_do_treinador=models.CharField(max_length=30)
+    senha=models.CharField(max_length=255,null=True)
     pokemons_coletados =models.ForeignKey(Pokemon,on_delete=models.CASCADE)
     insignias=models.ForeignKey(Ginasios,on_delete=models.CASCADE)
     foto =models.ImageField(upload_to=upload_de_pokemon,blank=True,null=True)
+    
 
 
 
