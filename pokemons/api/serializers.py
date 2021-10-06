@@ -1,6 +1,7 @@
 from django.db.models import fields
 from rest_framework import serializers
 from pokemons.models.models import Pokemon, Territorios,Ginasios,Treinador
+import bcrypt
 
 class PokemonSerializado(serializers.ModelSerializer):
     class Meta:
@@ -26,9 +27,5 @@ class treinadorSerializado(serializers.ModelSerializer):
         model =Treinador
         fields=['id','nome_do_treinador','senha','pokemons_coletados','insignias','foto']
 
-        def create_data(self,validated_data):
-
-            treinador =Treinador.objects.create(
-
-            )
+      
 

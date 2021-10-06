@@ -13,24 +13,36 @@ class Pokemon(models.Model):
     descricao = models.CharField(max_length=200)
     imagem =models.ImageField(upload_to=upload_de_pokemon,blank=True,null=True)
 
+    def __str__(self):
+        return self.nome
+
 class Territorios(models.Model):
     id=models.BigAutoField(primary_key=True)
     nome_do_territorio=models.CharField(max_length=20)
-    pokemons =models.ForeignKey(Pokemon,on_delete=models.CASCADE)
+    pokemons =models.ForeignKey(Pokemon,on_delete=models.CASCADE,blank=True,default=True)
     descricao =models.CharField(max_length=200)
     imagemTerritorial =models.ImageField(upload_to=upload_de_pokemon,blank=True,null=True)
 
+    def __str__(self):
+        return self.nome_do_territorio
+
+   
+
+
 class Ginasios(models.Model):
     id=models.BigAutoField(primary_key=True)
-    localizacao=models.OneToOneField(Territorios,on_delete=models.CASCADE)
+    localizacao=models.OneToOneField(Territorios,on_delete=models.CASCADE,default=True)
     nome_do_ginasio =models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.nome_do_ginasio
 
 class Treinador(models.Model):
     id=models.BigAutoField(primary_key=True)
     nome_do_treinador=models.CharField(max_length=30)
-    senha=models.CharField(max_length=255,null=True)
-    pokemons_coletados =models.ForeignKey(Pokemon,on_delete=models.CASCADE)
-    insignias=models.ForeignKey(Ginasios,on_delete=models.CASCADE)
+    senha=models.CharField(max_length=255, null=True)
+    pokemons_coletados =models.ForeignKey(Pokemon,on_delete=models.CASCADE,default=True)
+    insignias=models.ForeignKey(Ginasios,on_delete=models.CASCADE,default=True)
     foto =models.ImageField(upload_to=upload_de_pokemon,blank=True,null=True)
     
 
