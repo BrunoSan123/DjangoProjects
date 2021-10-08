@@ -1,5 +1,7 @@
 from django.db import models
 from django.db.models.base import Model
+from django.db.models.fields.related import OneToOneField
+
 
 def upload_de_pokemon(instance,filename):
     return f"{instance.id}-{filename}"
@@ -15,6 +17,12 @@ class Pokemon(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Pokemons_coletados(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    nome_do_pokemon=OneToOneField(Pokemon,on_delete=models.CASCADE,default=True)
+    
+
 
 class Territorios(models.Model):
     id=models.BigAutoField(primary_key=True)
@@ -41,9 +49,16 @@ class Treinador(models.Model):
     id=models.BigAutoField(primary_key=True)
     nome_do_treinador=models.CharField(max_length=30)
     senha=models.CharField(max_length=255, null=True)
-    pokemons_coletados =models.ForeignKey(Pokemon,on_delete=models.CASCADE,default=True)
+    pokemons_coletados =models.ForeignKey(Pokemons_coletados,on_delete=models.CASCADE,default=True)
     insignias=models.ForeignKey(Ginasios,on_delete=models.CASCADE,default=True)
     foto =models.ImageField(upload_to=upload_de_pokemon,blank=True,null=True)
+
+    def __str__(self):
+        return self.nome_do_treinador
+
+
+
+
     
 
 

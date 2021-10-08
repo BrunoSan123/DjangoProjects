@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from pokemons.models.models import Pokemon, Territorios,Ginasios,Treinador
+from pokemons.modelos.models import Pokemon, Territorios,Ginasios,Treinador
 import bcrypt
 
 class PokemonSerializado(serializers.ModelSerializer):

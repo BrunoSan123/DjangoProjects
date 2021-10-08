@@ -1,23 +1,11 @@
 from rest_framework import serializers, status
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from pokemons.models.models import Ginasios, Pokemon,Territorios,Treinador
+from pokemons.modelos.models import Ginasios, Pokemon,Territorios,Treinador
 from pokemons.api.serializers import GinasioSerializados, PokemonSerializado,TerritorioSerializado,treinadorSerializado
-from rest_framework_simplejwt.tokens import RefreshToken
-
-
-
-def obter_tokens_para_treinador(user):
-    refresh =RefreshToken.for_user(user)
-
-    return{
-        'refresh':str(refresh),
-        'access': str(refresh.access_token)
-    }
-
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET','POST'])
-
 def lista_de_pokemon(request):
     if request.method =='GET':
         pokemons=Pokemon.objects.all()
@@ -46,6 +34,7 @@ def lista_de_territorio(request):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)  
 
 @api_view(['GET'])
+@permission_classes({IsAuthenticated})
 def lista_de_treinador(request):
     if request.method=='GET':
         treinador = Treinador.objects.all()
@@ -80,15 +69,6 @@ def ginasios(request):
         )
 
 
-@api_view(['POST'])
-def login_treinador(request):
-
-    treinador =request.data.senha
-    query = Treinador.objects.filter(senha=treinador)
-    serializer =treinadorSerializado(data=request.data)
-    if serializer == query:
-        token =obter_tokens_para_treinador(serializer)
-        return Response(data=token)
 
 
 
